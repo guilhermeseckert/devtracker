@@ -22,4 +22,9 @@ export const api = {
 
   exportSummary: (from: string, to: string) =>
     invoke<string>("export_summary", { from, to }),
+
+  getAutostart: () => invoke<boolean>("get_autostart"),
+
+  setAutostart: (enabled: boolean) =>
+    invoke<void>("set_autostart", { enabled }),
 };

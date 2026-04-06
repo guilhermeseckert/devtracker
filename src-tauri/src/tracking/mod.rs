@@ -1,5 +1,6 @@
 pub mod active_app;
 pub mod git_branch;
+pub mod idle;
 pub mod jira;
 pub mod zoom;
 
@@ -174,6 +175,14 @@ fn repo_name_from_path(path: &str) -> String {
 }
 
 fn gather_state() -> CurrentState {
+    // Check if user is idle (screen locked or no input for 5+ min)
+    if idle::is_screen_locked() {
+        return CurrentState {
+            app_name: "Idle".to_string(),
+            ..CurrentState::default()
+        };
+    }
+
     let app_info = active_app::get_frontmost_app();
 
     let (app_name, bundle_id) = match &app_info {

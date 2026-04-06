@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ExportView } from "@/components/export-view";
+import { Settings } from "@/components/settings";
 import { StatusBar } from "@/components/status-bar";
 import { Summary } from "@/components/summary";
 import { Timeline } from "@/components/timeline";
@@ -29,6 +30,9 @@ function AppContent() {
           <TabsTrigger value="today">Today</TabsTrigger>
           <TabsTrigger value="summary">Summary</TabsTrigger>
           <TabsTrigger value="export">Export</TabsTrigger>
+          <TabsTrigger className="ml-auto" value="settings">
+            Settings
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent className="mt-0 flex-1 overflow-hidden" value="today">
@@ -39,6 +43,9 @@ function AppContent() {
         </TabsContent>
         <TabsContent className="mt-0 flex-1 overflow-hidden" value="export">
           <ExportView />
+        </TabsContent>
+        <TabsContent className="mt-0 flex-1 overflow-hidden" value="settings">
+          <Settings />
         </TabsContent>
       </Tabs>
     </div>

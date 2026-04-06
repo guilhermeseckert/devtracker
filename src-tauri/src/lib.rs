@@ -8,6 +8,7 @@ use tauri::{
     tray::TrayIconBuilder,
     Manager,
 };
+use tauri_plugin_autostart::MacosLauncher;
 use tauri_plugin_positioner::{Position, WindowExt};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -15,6 +16,11 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_positioner::init())
+        .plugin(
+            tauri_plugin_autostart::Builder::new()
+                .macos_launcher(MacosLauncher::LaunchAgent)
+                .build(),
+        )
         .setup(|app| {
             // Initialize database
             let database = Arc::new(db::Database::new().expect("Failed to initialize database"));
@@ -91,6 +97,8 @@ pub fn run() {
             commands::timeline::get_repo_summary,
             commands::tags::update_activity_ticket,
             commands::export::export_summary,
+            commands::settings::get_autostart,
+            commands::settings::set_autostart,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -8,6 +8,12 @@ Ever been asked "what did you work on this month?" and drawn a blank? DevTracker
 
 All data stays on your machine. Always.
 
+<p align="center">
+  <img src=".github/assets/timeline.png" alt="Timeline view" width="380"/>
+  &nbsp;&nbsp;
+  <img src=".github/assets/summary.png" alt="Summary view" width="380"/>
+</p>
+
 ## What it tracks
 
 | Signal | How | Permissions needed |
@@ -27,7 +33,9 @@ No accessibility permissions. No screen recording. No keylogging. Just lightweig
 - **Summary view** — hours grouped by Jira ticket or by repo, with week/month navigation
 - **Export** — one-click report generation, copy to clipboard
 - **Manual tagging** — click any block to assign or change a Jira ticket
-- **Sleep detection** — laptop sleep and idle gaps are automatically excluded
+- **Idle detection** — detects screen lock, screensaver, and keyboard/mouse inactivity (5+ min)
+- **Sleep detection** — laptop sleep gaps are automatically excluded
+- **Launch at login** — optional auto-start via Settings tab
 - **Multi-branch** — supports workflows with multiple repos open simultaneously (VS Code, Claude Code, terminal)
 - **Navigate history** — browse any past day, week, or month
 
@@ -35,7 +43,12 @@ No accessibility permissions. No screen recording. No keylogging. Just lightweig
 
 ### Download
 
-Grab the latest `.dmg` from the [Releases](https://github.com/guilhermeseckert/devtracker/releases) page. Open it, drag DevTracker to Applications, done.
+```bash
+brew tap guilhermeseckert/tap
+brew install --cask devtracker
+```
+
+Or grab the `.dmg` from the [Releases](https://github.com/guilhermeseckert/devtracker/releases) page.
 
 > On first launch, macOS may show "unidentified developer" — right-click the app and select Open, then confirm.
 
@@ -97,9 +110,12 @@ sqlite3 ~/Library/Application\ Support/com.devtracker.DevTracker/tracker.db \
 
 ## Roadmap
 
-- [ ] Idle detection via screen lock
+- [x] Idle detection via screen lock and HID inactivity
+- [x] Launch at login
+- [x] Homebrew cask install
 - [ ] Jira API integration (fetch ticket titles, auto-log hours)
 - [ ] VS Code extension for direct workspace reporting
+- [ ] CSV export
 - [ ] Editable time blocks (split, merge, drag boundaries)
 - [ ] Linux and Windows support
 - [ ] Slack/Teams call detection
