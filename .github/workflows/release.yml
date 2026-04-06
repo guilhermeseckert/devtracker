@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install frontend dependencies
+        run: pnpm install
+
+      - name: Lint & typecheck
+        run: |
+          pnpm typecheck
+          pnpm check
+
+      - name: Build Tauri app
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: "DevTracker ${{ github.ref_name }}"
+          releaseBody: |
+            Download `DevTracker.app.tar.gz` for macOS.
+
+            Extract and move to `/Applications`:
+            ```
+            tar -xzf DevTracker.app.tar.gz
+            mv DevTracker.app /Applications/
+            ```
+          releaseDraft: false
+          prerelease: false

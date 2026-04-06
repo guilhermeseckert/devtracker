@@ -1,0 +1,28 @@
+[package]
+name = "devtracker"
+version = "0.1.0"
+description = "A macOS menubar app that tracks developer activity for Jira reporting"
+authors = ["Guilherme Eckert"]
+edition = "2021"
+
+[lib]
+name = "devtracker_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-opener = "2"
+tauri-plugin-positioner = { version = "2", features = ["tray-icon"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+rusqlite = { version = "0.31", features = ["bundled"] }
+tokio = { version = "1", features = ["rt", "time"] }
+chrono = { version = "0.4", features = ["serde"] }
+regex = "1"
+directories = "5"
+objc2 = "0.6"
+objc2-app-kit = { version = "0.3", features = ["NSRunningApplication", "NSWorkspace"] }
+objc2-foundation = { version = "0.3", features = ["NSString"] }
