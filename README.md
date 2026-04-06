@@ -8,11 +8,7 @@ Ever been asked "what did you work on this month?" and drawn a blank? DevTracker
 
 All data stays on your machine. Always.
 
-<p align="center">
-  <img src=".github/assets/timeline.png" alt="Timeline view" width="380"/>
-  &nbsp;&nbsp;
-  <img src=".github/assets/summary.png" alt="Summary view" width="380"/>
-</p>
+<!-- Add screenshots: save timeline.png and summary.png to .github/assets/ -->
 
 ## What it tracks
 
